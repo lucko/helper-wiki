@@ -1,8 +1,8 @@
-# General
+## General
 * [Home](https://github.com/lucko/helper/wiki)
 * [Using helper](https://github.com/lucko/helper/wiki/General:-Using-helper)
 
-# helper
+## helper
 * [Events](https://github.com/lucko/helper/wiki/helper:-Events)
 * [Scheduler](https://github.com/lucko/helper/wiki/helper:-Scheduler)
 * [Promise](https://github.com/lucko/helper/wiki/helper:-Promise)
@@ -18,16 +18,16 @@
 * [Serialization](https://github.com/lucko/helper/wiki/helper:-Serialization)
 * [Bungee Messaging](https://github.com/lucko/helper/wiki/helper:-Bungee-Messaging)
 
-# helper-sql
+## helper-sql
 * [HelperDataSource]()
 
-# helper-redis
+## helper-redis
 * [HelperRedis]()
 
-# helper-mongo
+## helper-mongo
 * [HelperMongo]()
 
-# helper-js
+## helper-js
 * [Introduction](https://github.com/lucko/helper/wiki/helper-js:-Introduction)
 * [Script](https://github.com/lucko/helper/wiki/helper-js:-Script)
 * [Bindings](https://github.com/lucko/helper/wiki/helper-js:-Bindings)
