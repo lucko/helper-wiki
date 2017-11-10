@@ -1,7 +1,5 @@
 ![alt text](https://i.imgur.com/zllxTFp.png "Banner")
-
 # Navigation
-
 ## General
 * [Home](https://github.com/lucko/helper/wiki)
 * [Using helper](https://github.com/lucko/helper/wiki/General:-Using-helper)
