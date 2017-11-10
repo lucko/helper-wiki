@@ -18,7 +18,7 @@
 * [`Maven Annotations`](https://github.com/lucko/helper/wiki/helper:-Maven-Annotations) - download & install maven dependencies at runtime
 * [`Terminables`](https://github.com/lucko/helper/wiki/helper:-Terminables) - a family of interfaces to help easily manipulate objects which can be unregistered, stopped, or gracefully halted
 * [`Serialization`](https://github.com/lucko/helper/wiki/helper:-Serialization) - immutable and GSON compatible alternatives for common Bukkit objects
-* [`Bungee Messaging`](https://github.com/lucko/helper/wiki/helper:-Bungee-Messaging) - javascript plugins using helper-js and Nashorn
+* [`Bungee Messaging`](https://github.com/lucko/helper/wiki/helper:-Bungee-Messaging) - wrapper for BungeeCord's plugin messaging API
 
 ## helper-sql
 * [`HelperDataSource`]()
