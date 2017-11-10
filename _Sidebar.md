@@ -5,7 +5,7 @@
 
 # helper
 
-* [Events](helper:-Events)
+* [Events](https://github.com/lucko/helper/wiki/helper:-Events)
 * [Scheduler]()
 * [Promise]()
 * [Metadata]()
