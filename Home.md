@@ -1,1 +1,1 @@
-Welcome to the helper wiki!
+![alt text](https://i.imgur.com/zllxTFp.png "Banner")
