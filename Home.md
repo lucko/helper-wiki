@@ -1,4 +1,4 @@
-![alt text](https://i.imgur.com/zllxTFp.png "Banner")
+![](https://i.imgur.com/zllxTFp.png)
 # Navigation
 ## General
 * [`Home`](https://github.com/lucko/helper/wiki)
