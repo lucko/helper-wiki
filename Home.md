@@ -1,7 +1,5 @@
 ![alt text](https://i.imgur.com/zllxTFp.png "Banner")
 
-### Welcome to the helper wiki!
-
 # Navigation
 
 ## General
