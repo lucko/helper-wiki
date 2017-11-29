@@ -19,8 +19,8 @@ Events.subscribe(PlayerJoinEvent.class)
 The implementation provides a selection of default filters.
 ```java
 Events.subscribe(PlayerMoveEvent.class, EventPriority.MONITOR)
-        .filter(Events.DEFAULT_FILTERS.ignoreCancelled())
-        .filter(Events.DEFAULT_FILTERS.ignoreSameBlock())
+        .filter(EventFilters.ignoreCancelled())
+        .filter(EventFilters.ignoreSameBlock())
         .handler(e -> {
             // handle
         });
@@ -49,9 +49,13 @@ Events.merge(Player.class)
 Events handling can be done alongside the Cooldown system, allowing you to easily define time restrictions on certain events.
 ```java
 Events.subscribe(PlayerInteractEvent.class)
-        .filter(e -> e.getAction() == Action.RIGHT_CLICK_AIR)
+        .filter(EventFilters.ignoreCancelled())
         .filter(PlayerInteractEvent::hasItem)
+        .filter(PlayerInteractEvent::hasBlock)
+        .filter(e -> e.getHand() == EquipmentSlot.HAND)
+        .filter(e -> e.getAction() == Action.RIGHT_CLICK_BLOCK)
         .filter(e -> e.getItem().getType() == Material.BLAZE_ROD)
+        .filter(EventFilters.playerHasPermission("testplugin.infotool"))
         .withCooldown(
                 CooldownCollection.create(t -> t.getPlayer().getName(), Cooldown.of(10, TimeUnit.SECONDS)),
                 (cooldown, e) -> {
