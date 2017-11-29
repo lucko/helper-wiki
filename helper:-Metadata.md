@@ -1,11 +1,37 @@
 helper provides an alternate system to the Bukkit Metadata API. The main benefits over Bukkit are the use of generic types and automatically expiring, weak or soft values.
 
+The API uses a special `MetadataKey` object to reference values inside a `MetadataMap`.
+
+Keys are formed of an 'id' (a string) and their corresponding type.
+
+```java
+MetadataKey<Integer> PLAYER_LEVEL_KEY = MetadataKey.createIntegerKey("player-level");
+```
+
+You can also create keys with nested or custom types.
+```java
+MetadataKey<List<MyObject>> CUSTOM_KEY = MetadataKey.create("some-special-key", new TypeToken<List<MyObject>>(){});
+```
+
+`MetadataMap`s for common objects, such as players, other entities, blocks and worlds are provided by helper via `MetadataRegistry`s.
+```java
+// either is valid!
+MetadataMap playerMap = Metadata.players().provide(player);
+MetadataMap playerMap2 = Metadata.provide(player);
+```
+
+MetadataRegistries also provide lookup methods to search for all objects which have a given key.
+```java
+MetadataKey<Integer> PLAYER_LEVEL_KEY = MetadataKey.createIntegerKey("player-level");
+Map<Player, Integer> playersWithLevel = Metadata.players().getAllWithKey(PLAYER_LEVEL_KEY);
+```
+
 The metadata API can be easily integrated with the Event system, thanks to some default filters.
 ```java
 MetadataKey<Boolean> IN_ARENA_KEY = MetadataKey.createBooleanKey("in-arena");
 
 Events.subscribe(PlayerQuitEvent.class)
-        .filter(Events.DEFAULT_FILTERS.playerHasMetadata(IN_ARENA_KEY))
+        .filter(EventFilters.playerHasMetadata(IN_ARENA_KEY))
         .handler(e -> {
             // clear their inventory if they were in an arena
             e.getPlayer().getInventory().clear();
