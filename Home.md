@@ -14,6 +14,9 @@
 * [`Scoreboard`](https://github.com/lucko/helper/wiki/helper:-Scoreboard) - asynchronous scoreboard using ProtocolLib
 * [`GUI`](https://github.com/lucko/helper/wiki/helper:-GUI) - lightweight by highly adaptable and flexible menu abstraction
 * [`Menu Scheming`](https://github.com/lucko/helper/wiki/helper:-Menu-Scheming) - easily design menu layouts without having to worry about slot ids
+* [`Random`](https://github.com/lucko/helper/wiki/helper:-Random) - make random selections from collections of weighted elements
+* [`Bucket`](https://github.com/lucko/helper/wiki/helper:-Bucket) - sets of distributed and uniformly partitioned elements
+* [`Profiles`](https://github.com/lucko/helper/wiki/helper:-Profiles) - a lookup repository and cache for player uuid & name profiles
 * [`Plugin Annotations`](https://github.com/lucko/helper/wiki/helper:-Plugin-Annotations) - automatically create plugin.yml files for your projects using annotations
 * [`Maven Annotations`](https://github.com/lucko/helper/wiki/helper:-Maven-Annotations) - download & install maven dependencies at runtime
 * [`Terminables`](https://github.com/lucko/helper/wiki/helper:-Terminables) - a family of interfaces to help easily manipulate objects which can be unregistered, stopped, or gracefully halted
