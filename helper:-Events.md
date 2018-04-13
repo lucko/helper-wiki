@@ -48,6 +48,8 @@ Events.merge(Player.class)
 
 Events handling can be done alongside the Cooldown system, allowing you to easily define time restrictions on certain events.
 ```java
+CooldownMap<Player> cooldownMap = CooldownMap.create(Cooldown.of(10, TimeUnit.SECONDS));
+
 Events.subscribe(PlayerInteractEvent.class)
         .filter(EventFilters.ignoreCancelled())
         .filter(PlayerInteractEvent::hasItem)
@@ -56,14 +58,17 @@ Events.subscribe(PlayerInteractEvent.class)
         .filter(e -> e.getAction() == Action.RIGHT_CLICK_BLOCK)
         .filter(e -> e.getItem().getType() == Material.BLAZE_ROD)
         .filter(EventFilters.playerHasPermission("testplugin.infotool"))
-        .withCooldown(
-                CooldownCollection.create(t -> t.getPlayer().getName(), Cooldown.of(10, TimeUnit.SECONDS)),
-                (cooldown, e) -> {
-                    e.getPlayer().sendMessage("This gadget is on cooldown! (" + cooldown.remainingTime(TimeUnit.SECONDS) + " seconds left)");
-                })
+        .filter(e -> {
+            if (cooldownMap.test(e.getPlayer())) {
+                return true;
+            }
+
+            e.getPlayer().sendMessage("This gadget is on cooldown! (" + cooldownMap.remainingTime(e.getPlayer(), TimeUnit.SECONDS) + " seconds left)");
+            return false;
+        })
         .handler(e -> {
             // play some spooky gadget effect
-            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CAT_PURR, 1.0f, 1.0f);
+            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_CAT_PURR, 1.0f, 1.0f);
             e.getPlayer().playEffect(EntityEffect.FIREWORK_EXPLODE);
         });
 ```
