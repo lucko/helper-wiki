@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/zllxTFp.png)
 
-Use [Discord](https://discordapp.com/invite/Rnbpc7s) to ask questions.
+💬 Use [Discord](https://discordapp.com/invite/Rnbpc7s) to ask questions. 💬 
 
 # Navigation
 ## General
