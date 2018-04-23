@@ -1,4 +1,7 @@
 ![](https://i.imgur.com/zllxTFp.png)
+
+Use [Discord](https://discordapp.com/invite/Rnbpc7s) to ask questions.
+
 # Navigation
 ## General
 * [`Home`](https://github.com/lucko/helper/wiki)
