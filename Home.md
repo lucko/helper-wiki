@@ -18,8 +18,8 @@
 * [`Commands`](https://github.com/lucko/helper/wiki/helper:-Commands) - create commands using the builder pattern
 * [`Terminables`](https://github.com/lucko/helper/wiki/helper:-Terminables) - a family of interfaces to help easily manipulate objects which can be unregistered, stopped, or gracefully halted
 * [`Messenger`](https://github.com/lucko/helper/wiki/helper:-Messenger) - message channel abstraction
-  * [`Channels`]()
-  * [`Conversation Channels`]()
+  * [`Channels`]() - type-mapped system for sending Java objects between channel instances
+  * [`Conversation Channels`]() - channels which send messages requiring a reply from the recipient server
 * [`Extended Plugin`]() - an extended plugin class for easy integration with the Terminable pattern and other useful tools
   * [`Plugin Annotations`](https://github.com/lucko/helper/wiki/helper:-Plugin-Annotations) - automatically create plugin.yml files for your projects using annotations
   * [`Maven Annotations`](https://github.com/lucko/helper/wiki/helper:-Maven-Annotations) - download & install maven dependencies at runtime
