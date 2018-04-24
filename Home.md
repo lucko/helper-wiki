@@ -9,7 +9,7 @@
 
 ## helper
 
-#### Core functionality
+### Core functionality
 
 * [`Events`](https://github.com/lucko/helper/wiki/helper:-Events) - functional event handling and flexible listener registration
 * [`Scheduler`](https://github.com/lucko/helper/wiki/helper:-Scheduler) - easy access to the Bukkit scheduler
@@ -30,7 +30,7 @@
   * [`Paginated Gui`]() - automatic pagination of menu items
   * [`Menu Scheming`]() - easily design menu layouts without having to worry about slot ids
 
-#### Services
+### Services
 
 * [`Scoreboard`](https://github.com/lucko/helper/wiki/helper:-Scoreboard) - extended scoreboard api with asynchronous implementation using ProtocolLib
 * [`Bossbar`]() - fluent boss bar utility
@@ -40,7 +40,7 @@
 * [`Profiles`](https://github.com/lucko/helper/wiki/helper:-Profiles) - a lookup repository and cache for player uuid & name profiles
 * [`Npc`]() - simplified API for managing static player NPCs with click callbacks
 
-#### Utilities
+### Utilities
 
 * [`Random`](https://github.com/lucko/helper/wiki/helper:-Random) - make random selections from collections of weighted elements
 * [`Bucket`](https://github.com/lucko/helper/wiki/helper:-Bucket) - sets of distributed and uniformly partitioned elements
