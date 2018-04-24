@@ -13,31 +13,37 @@ If you do choose to shade the helper dependency into your plugin, please ensure 
     <dependency>
         <groupId>me.lucko</groupId>
         <artifactId>helper</artifactId>
-        <version>4.2.0</version>
+        <version>x.y.z</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>me.lucko</groupId>
         <artifactId>helper-sql</artifactId>
-        <version>1.0.4</version>
+        <version>x.y.z</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>me.lucko</groupId>
         <artifactId>helper-redis</artifactId>
-        <version>1.0.5</version>
+        <version>x.y.z</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>me.lucko</groupId>
         <artifactId>helper-mongo</artifactId>
-        <version>1.0.2</version>
+        <version>x.y.z</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>me.lucko</groupId>
+        <artifactId>helper-lilypad</artifactId>
+        <version>x.y.z</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>me.lucko</groupId>
         <artifactId>helper-profiles</artifactId>
-        <version>1.0.0</version>
+        <version>x.y.z</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -50,10 +56,11 @@ repositories {
 }
 
 dependencies {
-    compile ("me.lucko:helper:4.2.0")
-    compile ("me.lucko:helper-sql:1.0.4")
-    compile ("me.lucko:helper-redis:1.0.5")
-    compile ("me.lucko:helper-mongo:1.0.2")
-    compile ("me.lucko:helper-profiles:1.0.0")
+    compile ("me.lucko:helper:x.y.z")
+    compile ("me.lucko:helper-sql:x.y.z")
+    compile ("me.lucko:helper-redis:x.y.z")
+    compile ("me.lucko:helper-mongo:x.y.z")
+    compile ("me.lucko:helper-lilypad:x.y.z")
+    compile ("me.lucko:helper-profiles:x.y.z")
 }
 ```
