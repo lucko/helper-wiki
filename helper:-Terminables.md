@@ -1,24 +1,74 @@
-Terminables are a way to easily cleanup active objects in plugins when a shutdown or reset is needed.
+Terminables are a way to easily encapsulate and handle objects which need to be "terminated" at some point in the future.
 
 The system consists of a few key interfaces.
 
-* [`Terminable`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/Terminable.java) - The main interface. An object that can be unregistered, stopped, or gracefully halted.
-* [`TerminableConsumer`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/TerminableConsumer.java) - An object which binds with and registers Terminables.
-* [`CompositeTerminable`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/composite/CompositeTerminable.java) - An object which itself contains/has a number of Terminables, but does not register them internally.
-* [`CompositeTerminableConsumer`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/composite/CompositeTerminableConsumer.java) - A bit like a TerminableConsumer, just for CompositeTerminables
-* [`TerminableRegistry`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/registry/TerminableRegistry.java) - An object which is a Terminable itself, but also a TerminableConsumer & CompositeTerminableConsumer, all in one!
+* [`Terminable`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/Terminable.java) - An object that can be "terminated" (closed) later. Basically an extension of Java's AutoClosable.
+* [`TerminableConsumer`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/TerminableConsumer.java) - An object which accepts Terminables, and does something with them. (usually adds them to a registry for terminating later)
+* [`TerminableModule`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/module/TerminableModule.java) - A class which "sets up" (produces) a number of terminable instances, to be bound to a consumer. Think of this a bit like a listener class.
+* [`CompositeTerminable`](https://github.com/lucko/helper/blob/master/helper/src/main/java/me/lucko/helper/terminable/composite/CompositeTerminable.java) - A Terminable which is made up of several other Terminables. Usually used as a registry of terminables.
 
-Terminables are a really important part of helper, as so much of the utility is accessible from a static context. Terminables are a way to tame these floating, globally built handlers, and register them with the plugin instance.
 
-`ExtendedJavaPlugin` implements TerminableConsumer & CompositeTerminableConsumer, which lets you register Terminables and CompositeTerminables to the plugin. These are all terminated automagically when the plugin disables.
+Terminables are a really important part of helper, as so much of the utility is accessible and constructed from a static context. Terminables are a way to tame/bind these floating, globally built handlers, and register them with a concrete instance. (usually the plugin)
 
-To demonstrate, I'll first define a new CompositeTerminable. Think of this as a conventional Listener class in a regular plugin.
+### Obtaining a terminable.
+
+Most helper classes that create some sort of listener, activity or state return classes that extend Terminable.
+
+For example...
+
 ```java
-public class DemoListener implements CompositeTerminable {
+Terminable handler = Events.subscribe(PlayerJoinEvent.class).handler(e -> e.getPlayer().sendMessage("Hi!"));
+```
+
+By returning a Terminable, the API allows us to terminate the listener subscription at a later time.
+
+```java
+// Setup a listener
+Terminable handler = Events.subscribe(PlayerJoinEvent.class).handler(e -> e.getPlayer().sendMessage("Hi!"));
+
+// then later when we want to close the handler...
+handler.close();
+```
+
+Terminables can also be bound to a CompositeTerminable. The easiest way to do this is with the fluent `bindWith(...)` method.
+
+```
+CompositeTerminable composite = CompositeTerminable.create();
+
+Events.subscribe(PlayerJoinEvent.class)
+        .handler(e -> e.getPlayer().sendMessage("Hi!"))
+        .bindWith(composite);
+
+// the composite can then be closed later...
+composite.close();
+```
+
+### Plugins are TerminableConsumers!
+
+If you use helper's `ExtendedJavaPlugin`, you can bind terminables directly to the plugin instance, as it extends `TerminableConsumer`. The registered terminables are terminated when the plugin disables.
+
+```java
+public class TestPlugin extends ExtendedJavaPlugin {
+
+    @Override
+    protected void enable() {
+        Events.subscribe(PlayerJoinEvent.class)
+                .handler(e -> e.getPlayer().sendMessage("Hi!"))
+                .bindWith(this);
+    }
+}
+```
+
+### Using modules
+TerminableModules are an easy way to group Terminables together and initialise objects at the same time.
+
+To demonstrate, I'll first define a new TerminableModule.
+
+```java
+public class DemoListener implements TerminableModule {
 
     @Override
     public void setup(@Nonnull TerminableConsumer consumer) {
-
         Events.subscribe(PlayerJoinEvent.class)
                 .filter(e -> e.getPlayer().hasPermission("silentjoin"))
                 .handler(e -> e.setJoinMessage(null))
@@ -28,26 +78,18 @@ public class DemoListener implements CompositeTerminable {
                 .filter(e -> e.getPlayer().hasPermission("silentquit"))
                 .handler(e -> e.setQuitMessage(null))
                 .bindWith(consumer);
-
     }
 }
 ```
 
-Notice the `.bindWith(...)` calls? All Terminables have this method added via default in the interface. It lets you register that specific terminable with a consumer.
-
-In order to setup our DemoListener, we need a CompositeTerminableConsumer. Luckily, ExtendedJavaPlugin implements this for us!
+The module can then be initialised in the main plugin instance.
 
 ```java
-public class DemoPlugin extends ExtendedJavaPlugin {
+public class TestPlugin extends ExtendedJavaPlugin {
 
     @Override
     protected void enable() {
-
-        // either of these is fine (but don't use both!)
-        new DemoListener().bindWith(this);
-
-        bindComposite(new DemoListener());
-
+        bindModule(new DemoListener());
     }
 }
 ```
