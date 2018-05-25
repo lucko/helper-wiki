@@ -16,7 +16,7 @@
 * [Extended Plugin]()
   * [Plugin Annotations](https://github.com/lucko/helper/wiki/helper:-Plugin-Annotations)
   * [Maven Annotations](https://github.com/lucko/helper/wiki/helper:-Maven-Annotations)
-* [Serialization`](https://github.com/lucko/helper/wiki/helper:-Serialization)
+* [Serialization](https://github.com/lucko/helper/wiki/helper:-Serialization)
 * [Item]()
 * [Menu](https://github.com/lucko/helper/wiki/helper:-GUI)
   * [Gui]()
