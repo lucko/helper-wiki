@@ -26,7 +26,7 @@ public class Person {
     }
     
     private void printInfo() {
-        System.out.println("Hy name is " + getFirstName() + " " + getSecondName());
+        System.out.println("Hi name is " + getFirstName() + " " + getSecondName());
     }
 }
 ```
