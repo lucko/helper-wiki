@@ -15,17 +15,18 @@ BiConsumer<Player, ScoreboardObjective> updater = (p, obj) -> {
     );
 };
 
+Scoreboard sb = Services.load(Scoreboard.class);
+
 Events.subscribe(PlayerJoinEvent.class)
         .handler(e -> {
             // register a new scoreboard for the player when they join
-            Scoreboard sb = GlobalScoreboard.get();
             ScoreboardObjective obj = sb.createPlayerObjective(e.getPlayer(), "null", DisplaySlot.SIDEBAR);
             Metadata.provideForPlayer(e.getPlayer()).put(SCOREBOARD_KEY, obj);
 
             updater.accept(e.getPlayer(), obj);
         });
 
-Scheduler.runTaskRepeatingAsync(() -> {
+Schedulers.async().runRepeating(() -> {
     for (Player player : Bukkit.getOnlinePlayers()) {
         MetadataMap metadata = Metadata.provideForPlayer(player);
         ScoreboardObjective obj = metadata.getOrNull(SCOREBOARD_KEY);
