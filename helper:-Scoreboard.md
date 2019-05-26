@@ -15,7 +15,7 @@ BiConsumer<Player, ScoreboardObjective> updater = (p, obj) -> {
     );
 };
 
-Scoreboard sb = Services.load(Scoreboard.class);
+Scoreboard sb = Services.load(ScoreboardProvider.class).getScoreboard();
 
 Events.subscribe(PlayerJoinEvent.class)
         .handler(e -> {
